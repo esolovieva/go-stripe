@@ -3,7 +3,6 @@ STRIPE_SECRET=
 STRIPE_KEY=
 GOSTRIPE_PORT=4000
 API_PORT=4001
-DSN="root@(localhost:3306)/widgets?parseTime=true&tls=false"
 
 ## build: builds all binaries
 build: clean build_front build_back
@@ -34,13 +33,13 @@ start: start_front start_back
 ## start_front: starts the front end
 start_front: build_front
 	@echo Starting the front end...
-	set STRIPE_KEY=${STRIPE_KEY}&& set STRIPE_SECRET=${STRIPE_SECRET}&& start /B .\dist\gostripe.exe -dsn=${DSN}
+	@set "STRIPE_KEY=${STRIPE_KEY}" && set "STRIPE_SECRET=${STRIPE_SECRET}" && start "" /B .\dist\gostripe.exe -port=${GOSTRIPE_PORT} -api=http://localhost:${API_PORT}
 	@echo Front end running!
 
 ## start_back: starts the back end
 start_back: build_back
 	@echo Starting the back end...
-	set STRIPE_KEY=${STRIPE_KEY}&& set STRIPE_SECRET=${STRIPE_SECRET}&& start /B .\dist\gostripe_api.exe -dsn=${DSN}
+	@set "STRIPE_KEY=${STRIPE_KEY}" && set "STRIPE_SECRET=${STRIPE_SECRET}" && start "" /B .\dist\gostripe_api.exe -port=${API_PORT}
 	@echo Back end running!
 
 ## stop: stops the front and back end
