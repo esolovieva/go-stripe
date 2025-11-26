@@ -14,6 +14,9 @@ build/
 dist/
 out/
 
+# Air tmp file
+tmp/
+
 # Go workspace / modules
 # (модули сейчас не создают артефактов, но сохраняем на будущее)
 *.mod.tmp
