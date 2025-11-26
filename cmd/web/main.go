@@ -13,6 +13,9 @@ import (
 const version = "1.0.0"
 const cssVersion = "1"
 
+// config holds application configuration values loaded from command-line
+// flags, environment variables, or other sources. It includes server settings,
+// external API endpoints, database connection information, and Stripe keys.
 type config struct {
 	port int
 	env  string
@@ -26,6 +29,9 @@ type config struct {
 	}
 }
 
+// application aggregates the dependencies and shared resources used across
+// the entire web application, such as configuration, loggers, the template
+// cache, and the application version.
 type application struct {
 	config        config
 	infoLog       *log.Logger
@@ -34,6 +40,10 @@ type application struct {
 	version       string
 }
 
+// serve configures and starts the HTTP server using the application's settings.
+// It applies reasonable timeouts to protect the server from slow or malicious
+// clients. The method logs server startup details and returns any error
+// encountered during ListenAndServe.
 func (app *application) serve() error {
 	srv := &http.Server{
 		Addr:              fmt.Sprintf(":%d", app.config.port), //server Port
@@ -48,6 +58,11 @@ func (app *application) serve() error {
 	return srv.ListenAndServe()
 }
 
+// main is the entry point of the application. It reads configuration values
+// from command-line flags and environment variables, initializes loggers,
+// prepares the template cache, constructs the application dependency container,
+// and finally starts the HTTP server. If the server fails to start or encounters
+// a runtime error, the function logs the error and terminates the program.
 func main() {
 	//Reading command line arguments. Example: go run . -port=8080 -env=production
 	var cfg config
