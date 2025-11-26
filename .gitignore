@@ -1,0 +1,42 @@
+README.md
+
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Go build output
+bin/
+build/
+dist/
+out/
+
+# Go workspace / modules
+# (модули сейчас не создают артефактов, но сохраняем на будущее)
+*.mod.tmp
+
+# Unit test cache
+*.cover
+*.coverprofile
+*.out
+coverage.*
+*.lcov
+
+# IDE / Editor settings
+# VSCode
+.vscode/
+*.code-workspace
+
+# MacOS
+.DS_Store
+
+# Linux temp
+*~
+
+# Logs
+*.log
+
+
